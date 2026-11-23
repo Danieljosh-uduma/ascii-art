@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII ART GENERATOR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #f1eded;
+        }
+
+        section {
+            width: min(90%, 900px);
+            margin: 30px auto 0;
+            border-radius: 12px;
+            background-color: #fff;
+            box-shadow: 0 3px 5px rgb(207, 206, 206);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            padding: 11px 22px;
+            box-shadow: 0 0px 10px rgb(207, 206, 206);
+        }
+
+        .container {
+            padding: 18px 26px;
+
+            p {
+                font-style: italic;
+                margin-bottom: 4px;
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            label {
+                font-size: 1.15rem;
+                display: flex;
+                gap: 15px;
+                align-items: center;
+            }
+
+            input[type="text"] {
+                height: 38px;
+                border-radius: 50px;
+                border: none;
+                background-color: rgb(241, 237, 237);
+                padding: 0 10px;
+                font-size: 18px;
+
+                &:focus {
+                    outline: 1px solid gray;
+                }
+            }
+        }
+
+        button {
+            height: 38px;
+            border-radius: 50px;
+            border: none;
+            width: 150px;
+            font-weight: bold;
+            font-size: 15px;
+            background-color: blue;
+            color: whitesmoke;
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+        }
+
+        pre {
+            color: rgb(1, 1, 53);
+            background-color: rgb(223, 219, 219);
+            overflow-x: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div>
+            <h1>ASCII ART GENERATOR</h1>
+        </div>
+        <div class="container">
+            <p>Convert letters to ascii</p>
+            {{if not .Success}}
+            <div>
+                <form action="/ascii-art" method="post">
+                    <label for="text">Text:
+                        <input type="text" id="text" name="text" placeholder="Enter a text here..." \ required />
+                    </label>
+                    <label for="banner">Banner:
+                        <label for="standard">
+                            <input type="radio" name="banner" id="standard" value="standard" required checked />
+                            Standard
+                        </label>
+                        <label for="shadow">
+                            <input type="radio" name="banner" id="shadow" value="shadow" required /> Shadow
+                        </label>
+                        <label for="thinkertoy">
+                            <input type="radio" name="banner" id="thinkertoy" value="thinkertoy" required /> Thinkertoy
+                        </label>
+                    </label>
+                    <button type="submit">
+                        Submit
+                    </button>
+                </form>
+            </div>
+            {{else}}
+            <div>
+                <pre>
+
+{{.Ascii}}
+                                                        
+                    </pre>
+                <button>
+                    <a href="/">Try again!</a>
+                </button>
+            </div>
+            {{end}}
+        </div>
+    </section>
+</body>
+
+</html>
